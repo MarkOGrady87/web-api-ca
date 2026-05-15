@@ -5,10 +5,16 @@ import { getUpcomingMovies } from '../tmdb-api';
 import { getTopRatedMovies } from '../tmdb-api';
 import { getPopularMovies } from '../tmdb-api';
 import { getNowPlayingMovies } from '../tmdb-api';
+import { getMovie } from '../tmdb-api';
 
 const router = express.Router();
 
 // movie routes to be added
+router.get('/:id', asyncHandler(async (req, res) => {
+    const movie = await getMovie(req.params.id);
+    res.status(200).json(movie);
+}));
+
 router.get('/discover', asyncHandler(async (req, res) => {
     const discoverMovies = await getMovies();
     res.status(200).json(discoverMovies);
