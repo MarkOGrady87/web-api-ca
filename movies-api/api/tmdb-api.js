@@ -107,3 +107,15 @@ export const getMovieReviews = async (id) => {
 
     return await response.json();
 };
+
+export const getMovieCredits = async (id) => {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_KEY}`,
+    );
+
+    if (!response.ok) {
+        throw new Error(response.json().message);
+    }
+
+    return await response.json();
+};
