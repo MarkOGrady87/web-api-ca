@@ -15,8 +15,8 @@ import { getSimilarMovies } from '../tmdb-api';
 const router = express.Router();
 
 // movie routes to be added
-router.get('/discover', asyncHandler(async (req, res) => {
-    const discoverMovies = await getMovies();
+router.get('/discover/:pageId', asyncHandler(async (req, res) => {
+    const discoverMovies = await getMovies(req.params.pageId);
     res.status(200).json(discoverMovies);
 }));
 
@@ -25,13 +25,13 @@ router.get('/upcoming', asyncHandler(async (req, res) => {
     res.status(200).json(upcomingMovies);
 }));
 
-router.get('/top_rated', asyncHandler(async (req, res) => {
-    const topRatedMovies = await getTopRatedMovies();
+router.get('/top_rated/:pageId', asyncHandler(async (req, res) => {
+    const topRatedMovies = await getTopRatedMovies(req.params.pageId);
     res.status(200).json(topRatedMovies);
 }));
 
-router.get('/popular', asyncHandler(async (req, res) => {
-    const popularMovies = await getPopularMovies();
+router.get('/popular/:pageId', asyncHandler(async (req, res) => {
+    const popularMovies = await getPopularMovies(req.params.pageId);
     res.status(200).json(popularMovies);
 }));
 

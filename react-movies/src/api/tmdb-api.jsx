@@ -1,25 +1,8 @@
-/*  export const getMovies = ({ queryKey }) => {
+export const getMovies = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { pageId } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageId}`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
-};  */
-
-export const getMovies = () => {
-  return fetch(
-    `http://localhost:8080/api/movies/discover`
+    `http://localhost:8080/api/movies/discover/${pageId}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -28,14 +11,14 @@ export const getMovies = () => {
     }
     return response.json();
   })
-  .catch((error) => {
+    .catch((error) => {
       throw error
-  });
-}; 
+    });
+};
 
 export const getMovie = (args) => {
   const [, idPart] = args.queryKey;
-  const {id} = idPart;
+  const { id } = idPart;
   return fetch(
     `http://localhost:8080/api/movies/${id}`
   ).then((response) => {
@@ -46,10 +29,10 @@ export const getMovie = (args) => {
     }
     return response.json();
   })
-  .catch((error) => {
+    .catch((error) => {
       throw error
-  });
-}; 
+    });
+};
 
 export const getGenres = () => {
   return fetch(
@@ -106,23 +89,6 @@ export const getMovieReviews = ({ queryKey }) => {
     });
 };
 
-/* export const getUpcomingMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
-}; */
-
 export const getUpcomingMovies = () => {
   return fetch(
     `http://localhost:8080/api/movies/upcoming`
@@ -134,33 +100,16 @@ export const getUpcomingMovies = () => {
     }
     return response.json();
   })
-  .catch((error) => {
+    .catch((error) => {
       throw error
-  });
-}; 
+    });
+};
 
-/* export const getTopRatedMovies = ({ queryKey }) => {
+export const getTopRatedMovies = ({queryKey}) => {
   const [, idPart] = queryKey;
   const { pageId } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${pageId}`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
-}; */
-
-export const getTopRatedMovies = () => {
-  return fetch(
-    `http://localhost:8080/api/movies/top_rated`
+    `http://localhost:8080/api/movies/top_rated/${pageId}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -169,33 +118,16 @@ export const getTopRatedMovies = () => {
     }
     return response.json();
   })
-  .catch((error) => {
+    .catch((error) => {
       throw error
-  });
-}; 
+    });
+};
 
-/* export const getPopularMovies = ({ queryKey }) => {
+export const getPopularMovies = ({queryKey}) => {
   const [, idPart] = queryKey;
   const { pageId } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${pageId}`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
-}; */
-
-export const getPopularMovies = () => {
-  return fetch(
-    `http://localhost:8080/api/movies/popular`
+    `http://localhost:8080/api/movies/popular/${pageId}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -204,27 +136,10 @@ export const getPopularMovies = () => {
     }
     return response.json();
   })
-  .catch((error) => {
-      throw error
-  });
-}; 
-
-/* export const getNowPlayingMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
     .catch((error) => {
-      throw error;
+      throw error
     });
-}; */
+};
 
 export const getNowPlayingMovies = () => {
   return fetch(
@@ -237,10 +152,10 @@ export const getNowPlayingMovies = () => {
     }
     return response.json();
   })
-  .catch((error) => {
+    .catch((error) => {
       throw error
-  });
-}; 
+    });
+};
 
 export const getMovieCredits = ({ queryKey }) => {
   const [, idPart] = queryKey;
@@ -280,28 +195,11 @@ export const getSimilarMovies = ({ queryKey }) => {
     });
 };
 
-/* export const getPopularPeople = ({queryKey}) => {
+export const getPopularPeople = ({queryKey}) => {
   const [, idPart] = queryKey;
   const { pageId } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${pageId}`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
-}; */
-
-export const getPopularPeople = () => {
-  return fetch(
-    `http://localhost:8080/api/actors/popular`
+    `http://localhost:8080/api/actors/popular/${pageId}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -310,10 +208,10 @@ export const getPopularPeople = () => {
     }
     return response.json();
   })
-  .catch((error) => {
+    .catch((error) => {
       throw error
-  });
-}; 
+    });
+};
 
 export const getActor = ({ queryKey }) => {
   const [, idPart] = queryKey;

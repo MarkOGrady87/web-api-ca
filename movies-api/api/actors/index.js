@@ -8,8 +8,8 @@ import { getActorCredits} from '../tmdb-api';
 const router = express.Router();
 
 // actor routes to be added
-router.get('/popular', asyncHandler(async (req, res) => {
-    const popular = await getPopularPeople();
+router.get('/popular/:pageId', asyncHandler(async (req, res) => {
+    const popular = await getPopularPeople(req.params.pageId);
     res.status(200).json(popular);
 }));
 

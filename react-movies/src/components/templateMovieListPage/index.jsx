@@ -80,6 +80,7 @@ function MovieListPageTemplate({ movies, title, action, page, onPageChange }) {
           <MovieList action={action} movies={displayedMovies}></MovieList>
         </Grid>
       </Grid>
+      {page != null &&(
       <Grid sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
         <Pagination
           count={10}
@@ -88,7 +89,7 @@ function MovieListPageTemplate({ movies, title, action, page, onPageChange }) {
           showFirstButton
           showLastButton
         />
-      </Grid>
+      </Grid>)}
     </>
   );
 }

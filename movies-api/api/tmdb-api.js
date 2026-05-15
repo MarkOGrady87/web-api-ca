@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 
-export const getMovies = async () => {
+export const getMovies = async (pageId) => {
     const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageId}`
     );
 
     if (!response.ok) {
@@ -24,9 +24,9 @@ export const getUpcomingMovies = async () => {
     return await response.json();
 };
 
-export const getTopRatedMovies = async () => {
+export const getTopRatedMovies = async (pageId) => {
     const response = await fetch(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=${pageId}`,
     );
 
     if (!response.ok) {
@@ -36,9 +36,9 @@ export const getTopRatedMovies = async () => {
     return await response.json();
 };
 
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (pageId) => {
     const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=${pageId}`,
     );
 
     if (!response.ok) {
@@ -132,9 +132,9 @@ export const getSimilarMovies = async (id) => {
     return await response.json();
 };
 
-export const getPopularPeople = async () => {
+export const getPopularPeople = async (pageId) => {
     const response = await fetch(
-        `https://api.themoviedb.org/3/person/popular?api_key=${process.env.TMDB_KEY}`,
+        `https://api.themoviedb.org/3/person/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=${pageId}`,
     );
 
     if (!response.ok) {
