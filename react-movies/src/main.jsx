@@ -18,12 +18,16 @@ import PopularPeoplePage from "./pages/PopularPeoplePage";
 import ActorDetailsPage from "./pages/ActorDetailsPage";
 import WatchlistMoviesPage from "./pages/WatchlistMoviesPage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { AuthContext } from "./contexts/authContext";
+import { useContext } from "react";
+import StartHeader from "./components/startHeader";
+import StartPage from "./pages/startPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 360000,
-      refetchInterval: 360000, 
+      refetchInterval: 360000,
       refetchOnWindowFocus: false
     },
   },
@@ -44,38 +48,39 @@ const theme = createTheme({
 });
 
 const App = () => {
+  const context = useContext(AuthContext)
   return (
     <ThemeProvider theme={theme}>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <SiteHeader />
-        <MoviesContextProvider>
-          <Routes>
-            <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-            <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-            <Route path="/movies/:id" element={<MoviePage />} />
-            <Route path="/:pageId" element={<HomePage />} />
-            <Route path="*" element={ <Navigate to="/1" /> } />
-            <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-            <Route path="/movies/upcoming" element={<UpcomingMoviesPage/>}/>
-            <Route path="/movies/toprated/:pageId" element={<TopRatedMoviesPage/>}/>
-            <Route path="/movies/popular/:pageId" element={<PopularMoviesPage/>}/>
-            <Route path="/movies/nowplaying" element={<NowPlayingMoviesPage/>}/>
-            <Route path="/actors/popular/:pageId" element={<PopularPeoplePage/>}/>
-            <Route path="/actors/:id" element={<ActorDetailsPage/>}/>
-            <Route path="/movies/watchlist" element={<WatchlistMoviesPage/>}/>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <SiteHeader />
+          <MoviesContextProvider>
+            <Routes>
+              <Route path="/" element={<StartPage/>}/>
+              <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+              <Route path="/reviews/:id" element={<MovieReviewPage />} />
+              <Route path="/movies/:id" element={<MoviePage />} />
+              <Route path="/movies/discover/:pageId" element={<HomePage />} />
+              <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+              <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+              <Route path="/movies/toprated/:pageId" element={<TopRatedMoviesPage />} />
+              <Route path="/movies/popular/:pageId" element={<PopularMoviesPage />} />
+              <Route path="/movies/nowplaying" element={<NowPlayingMoviesPage />} />
+              <Route path="/actors/popular/:pageId" element={<PopularPeoplePage />} />
+              <Route path="/actors/:id" element={<ActorDetailsPage />} />
+              <Route path="/movies/watchlist" element={<WatchlistMoviesPage />} />
+              <Route path="*" element={<Navigate to="/" />} />
 
-
-          </Routes>
-        </MoviesContextProvider>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+            </Routes>
+          </MoviesContextProvider>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
 
 
 
-const rootElement = createRoot( document.getElementById("root") )
+const rootElement = createRoot(document.getElementById("root"))
 rootElement.render(<App />);

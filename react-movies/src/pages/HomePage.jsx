@@ -28,7 +28,7 @@ const HomePage = (props) => {
   const movies = data.results;
 
   const handlePageChange = (event, value) => {
-    navigate(`/${value}`);
+    navigate(`/movies/discover/${value}`);
   };
 
   const favorites = movies.filter((m) => m.favorite);
