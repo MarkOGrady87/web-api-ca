@@ -74,9 +74,7 @@ export const getMovie = (args) => {
 
 export const getGenres = () => {
   return fetch(
-    "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-      import.meta.env.VITE_TMDB_KEY +
-      "&language=en-US",
+    `http://localhost:8080/api/movies/genre`,
   )
     .then((response) => {
       if (!response.ok) {
