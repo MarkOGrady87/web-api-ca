@@ -38,7 +38,7 @@ app.use('/api/movies', moviesRouter);
 app.use('/api/users', usersRouter);
 
 //Actors router
-app.use('/api/actor', actorRouter);
+app.use('/api/actors', actorRouter);
 
 app.use(errHandler);
 

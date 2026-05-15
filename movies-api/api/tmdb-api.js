@@ -132,9 +132,21 @@ export const getSimilarMovies = async (id) => {
     return await response.json();
 };
 
-export const getPopularPeople = async (id) => {
+export const getPopularPeople = async () => {
     const response = await fetch(
         `https://api.themoviedb.org/3/person/popular?api_key=${process.env.TMDB_KEY}`,
+    );
+
+    if (!response.ok) {
+        throw new Error(response.json().message);
+    }
+
+    return await response.json();
+};
+
+export const getActor = async (id) => {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.TMDB_KEY}`,
     );
 
     if (!response.ok) {
