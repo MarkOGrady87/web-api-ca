@@ -25,7 +25,7 @@ const PopularPeoplePage = (props) => {
   const actors = data.results;
 
   const handlePageChange = (event, value) => {
-    navigate(`/people/popular/${value}`);
+    navigate(`/actors/popular/${value}`);
   };
 
   return (
