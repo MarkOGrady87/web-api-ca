@@ -8,6 +8,8 @@ import { getNowPlayingMovies } from '../tmdb-api';
 import { getMovie } from '../tmdb-api';
 import { getGenres } from '../tmdb-api';
 import { getMovieImages } from '../tmdb-api';
+import { getMovieReviews } from '../tmdb-api';
+
 
 const router = express.Router();
 
@@ -50,6 +52,11 @@ router.get('/:id', asyncHandler(async (req, res) => {
 router.get('/:id/images', asyncHandler(async (req, res) => {
     const movieImages = await getMovieImages(req.params.id);
     res.status(200).json(movieImages);
+}));
+
+router.get('/:id/reviews', asyncHandler(async (req, res) => {
+    const movieReviews = await getMovieReviews(req.params.id);
+    res.status(200).json(movieReviews);
 }));
 
 
