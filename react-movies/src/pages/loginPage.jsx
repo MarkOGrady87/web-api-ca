@@ -2,15 +2,22 @@ import { useContext, useState } from "react";
 import { Navigate, useLocation } from "react-router";
 import { AuthContext } from '../contexts/authContext';
 import { Link } from "react-router";
+import Typography from "@mui/material/Typography";
 
 const LoginPage = () => {
     const context = useContext(AuthContext);
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("")
 
-    const login = () => {
-        context.authenticate(userName, password);
+    const login = async () => {
+        try {
+            setErrorMessage("")
+            await context.authenticate(userName, password);
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
     };
 
     let location = useLocation();
@@ -32,6 +39,11 @@ const LoginPage = () => {
             <input id="password" type="password" placeholder="password" onChange={e => {
                 setPassword(e.target.value);
             }}></input><br />
+            {errorMessage && (
+                <Typography color="error" sx={{ mt: 2 }}>
+                    {errorMessage}
+                </Typography>
+            )}
             {/* Login web form  */}
             <button onClick={login}>Log in</button>
             <p>Not Registered?

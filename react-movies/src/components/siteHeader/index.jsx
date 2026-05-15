@@ -25,9 +25,8 @@ const SiteHeader = () => {
   const navigate = useNavigate();
 
   const menuOptions = context.isAuthenticated ? [
-    { label: "Home", path: "/movies/discover/1" },
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "Watchlist", path: "/movies/watchlist" },
+/*     { label: "Favorites", path: "/movies/favorites" },
+    { label: "Watchlist", path: "/movies/watchlist" }, */
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/toprated/1" },
     { label: "Popular", path: "/movies/popular/1" },
@@ -52,7 +51,7 @@ const SiteHeader = () => {
     <>
       <AppBar position="fixed" color="secondary">
         <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1 }}>
+          <Typography variant="h4" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => navigate("/movies/discover/1")}>
             TMDB Client
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
