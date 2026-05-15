@@ -1,0 +1,13 @@
+import express from 'express';
+import asyncHandler from 'express-async-handler';
+import { getPopularPeople } from '../tmdb-api';
+
+const router = express.Router();
+
+// actor routes to be added
+router.get('/popular', asyncHandler(async (req, res) => {
+    const popular = await getPopularPeople();
+    res.status(200).json(popular);
+}));
+
+export default router;

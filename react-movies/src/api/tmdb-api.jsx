@@ -265,7 +265,7 @@ export const getSimilarMovies = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${import.meta.env.VITE_TMDB_KEY}`,
+    `http://localhost:8080/api/movies/${id}/similar`,
   )
     .then((response) => {
       if (!response.ok) {
@@ -280,7 +280,7 @@ export const getSimilarMovies = ({ queryKey }) => {
     });
 };
 
-export const getPopularPeople = ({queryKey}) => {
+/* export const getPopularPeople = ({queryKey}) => {
   const [, idPart] = queryKey;
   const { pageId } = idPart;
   return fetch(
@@ -297,7 +297,23 @@ export const getPopularPeople = ({queryKey}) => {
     .catch((error) => {
       throw error;
     });
-};
+}; */
+
+export const getPopularPeople = () => {
+  return fetch(
+    `http://localhost:8080/api/actor/popular`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+      throw error
+  });
+}; 
 
 export const getActor = ({ queryKey }) => {
   const [, idPart] = queryKey;

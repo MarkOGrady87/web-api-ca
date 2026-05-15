@@ -10,6 +10,7 @@ import { getGenres } from '../tmdb-api';
 import { getMovieImages } from '../tmdb-api';
 import { getMovieReviews } from '../tmdb-api';
 import { getMovieCredits } from '../tmdb-api';
+import { getSimilarMovies } from '../tmdb-api';
 
 const router = express.Router();
 
@@ -62,6 +63,11 @@ router.get('/:id/reviews', asyncHandler(async (req, res) => {
 router.get('/:id/credits', asyncHandler(async (req, res) => {
     const movieCredits = await getMovieCredits(req.params.id);
     res.status(200).json(movieCredits);
+}));
+
+router.get('/:id/similar', asyncHandler(async (req, res) => {
+    const movieSimilar = await getSimilarMovies(req.params.id);
+    res.status(200).json(movieSimilar);
 }));
 
 export default router;
