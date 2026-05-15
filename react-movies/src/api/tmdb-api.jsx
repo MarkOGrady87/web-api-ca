@@ -33,27 +33,6 @@ export const getMovies = () => {
   });
 }; 
 
-
-/* export const getMovie = (args) => {
-  console.log(args);
-  const [, idPart] = args.queryKey;
-  const { id } = idPart;
-  return fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`,
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
-}; */
-
 export const getMovie = (args) => {
   const [, idPart] = args.queryKey;
   const {id} = idPart;
@@ -93,7 +72,7 @@ export const getMovieImages = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`,
+    `http://localhost:8080/api/movies/${id}/images`,
   )
     .then((response) => {
       if (!response.ok) {
