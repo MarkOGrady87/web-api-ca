@@ -1,1 +1,3 @@
-# web-api-ca
+# Assignment 2 - web API
+
+Name : Mark O'Grady
