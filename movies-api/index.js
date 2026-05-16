@@ -8,6 +8,8 @@ import usersRouter from './api/users';
 import authenticate from './authenticate';
 import moviesRouter from './api/movies';
 import actorRouter from './api/actors';
+import favouriteMoviesRouter from './api/favouriteMovies';
+
 
 dotenv.config();
 
@@ -39,6 +41,8 @@ app.use('/api/users', usersRouter);
 
 //Actors router
 app.use('/api/actors', actorRouter);
+
+app.use('/api/favourites', favouriteMoviesRouter);
 
 app.use(errHandler);
 
