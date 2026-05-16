@@ -48,7 +48,26 @@ const styles = {
     },
   },
   textField: {
-    width: "40ch",
+
+    "& .MuiInputLabel-root": {
+      color: "white",
+    },
+
+    "& .MuiInputBase-input": {
+      color: "white",
+    },
+
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "#00ACC1",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#00ACC1",
+      },
+    },
   },
   submit: {
     marginRight: 2,
@@ -132,7 +151,7 @@ const ReviewForm = ({ movie }) => {
           defaultValue=""
           render={({ field: { onChange, value } }) => (
             <TextField
-              sx={{ width: "40ch" }}
+              sx={styles.textField}
               variant="outlined"
               margin="normal"
               required
@@ -160,6 +179,7 @@ const ReviewForm = ({ movie }) => {
           defaultValue=""
           render={({ field: { onChange, value } }) => (
             <TextField
+              sx={styles.textField}
               variant="outlined"
               margin="normal"
               required
@@ -185,6 +205,7 @@ const ReviewForm = ({ movie }) => {
           name="rating"
           render={({ field: { onChange, value } }) => (
             <TextField
+              sx={styles.textField}
               id="select-rating"
               select
               variant="outlined"

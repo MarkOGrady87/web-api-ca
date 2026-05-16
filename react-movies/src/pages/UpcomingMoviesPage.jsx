@@ -32,7 +32,7 @@ const UpcomingMoviesPage = () => {
         return (
           <>
             <AddToFavoritesIcon movie={movie} />
-            <AddToWatchlistIcon movie-={movie}/>
+            <AddToWatchlistIcon movie={movie}/>
           </>
         );
       }}
