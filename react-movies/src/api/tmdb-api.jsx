@@ -296,6 +296,14 @@ export const signup = async (username, password) => {
         },
         method: 'post',
         body: JSON.stringify({ username: username, password: password })
-    });
-    return response.json();
+    }).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.msg);
+        });
+      }
+      return response.json();
+    })
+
+    return response;
 };

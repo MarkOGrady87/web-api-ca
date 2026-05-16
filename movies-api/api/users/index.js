@@ -37,6 +37,11 @@ async function registerUser(req, res) {
         if (!validation.test(password)) {
             return res.status(400).json({ success: false, msg: "Password must be at least 8 characters and include one uppercase letter, one lowercase letter, one number, and one special character." })
         }
+        let username = req.body.username;
+        let userValidation = /^[A-Z][A-Za-z0-9_]{3,15}$/;
+        if(!userValidation.test(username)) {
+            return res.status(400).json({success: false, msg: "Username must start with a capital letter and be between 4 and 16 characters long"})
+        }
 
         await User.create(req.body);
         res.status(201).json({ success: true, msg: 'User successfully created.' });

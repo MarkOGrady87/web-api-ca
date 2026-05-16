@@ -1,23 +1,36 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router";
 import { AuthContext } from '../contexts/authContext';
-
+import Typography from "@mui/material/Typography";
 const SignUpPage = () => {
   const context = useContext(AuthContext)
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [registered, setRegistered] = useState(false);
-  
-  const register = async () => {
-    let passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    const validPassword = passwordRegEx.test(password);
+  const [errorMessage, setErrorMessage] = useState("")
 
-    if (validPassword && password === passwordAgain) {
+  const register = async () => {
+    let passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const validPassword = passwordRegEx.test(password);
+    if (!validPassword) {
+      setErrorMessage("Password must be at least 8 characters and include one uppercase letter, one lowercase letter, one number, and one special character.");
+      return;
+    }
+
+    if (password !== passwordAgain) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
+
+    try {
+      setErrorMessage("");
       let result = await context.register(userName, password);
       setRegistered(result);
+    } catch (error) {
+      setErrorMessage(error.message);
     }
-  }
+  };
 
   if (registered === true) {
     return <Navigate to="/login" />;
@@ -36,6 +49,11 @@ const SignUpPage = () => {
       <input value={passwordAgain} type="password" placeholder="password again" onChange={e => {
         setPasswordAgain(e.target.value);
       }}></input><br />
+      {errorMessage && (
+        <Typography color="error" sx={{ mt: 2 }}>
+          {errorMessage}
+        </Typography>
+      )}
       {/* Login web form  */}
       <button onClick={register}>Register</button>
     </>
