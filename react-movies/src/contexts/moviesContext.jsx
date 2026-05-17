@@ -40,25 +40,6 @@ const MoviesContextProvider = (props) => {
   const addReview = (movie, review) => {
     setMyReviews({ ...myReviews, [movie.id]: review })
   };
-  //console.log(myReviews);
-
-  /* const addToWatchlist = (movie) => {
-    let newWatchlist = [];
-    if (!watchlist.includes(movie.id)) {
-      newWatchlist = [...watchlist, movie.id];
-    }
-    else {
-      newWatchlist = [...watchlist];
-    }
-    setWatchlist(newWatchlist)
-  };
-  console.log(watchlist)
-
-  const removeFromWatchlist = (movie) => {
-    setWatchlist(watchlist.filter(
-      (mId) => mId !== movie.id
-    ))
-  }; */
 
     const addToWatchlist = async (movie) => {
     if (!watchlist.includes(movie.id)) {
