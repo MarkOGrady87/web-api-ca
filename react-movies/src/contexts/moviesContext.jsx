@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { addFavouriteMovie, getFavouriteMovies, deleteFavouriteMovies } from "../api/tmdb-api";
+import { AuthContext } from "./authContext";
 
 export const MoviesContext = React.createContext(null);
 
@@ -7,13 +8,14 @@ const MoviesContextProvider = (props) => {
   const [favorites, setFavorites] = useState([])
   const [myReviews, setMyReviews] = useState({})
   const [watchlist, setWatchlist] = useState([])
+  const authContext = useContext(AuthContext);
 
 
   useEffect(() => {
     getFavouriteMovies().then(favouriteMovies => {
       setFavorites(favouriteMovies.map((f) => f.movieId));
     });
-  }, []);
+  }, [authContext.isAuthenticated]);
 
   const addToFavorites = async (movie) => {
     if (!favorites.includes(movie.id)) {
