@@ -7,14 +7,7 @@ import Spinner from '../components/spinner'
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 const FavoriteMoviesPage = () => {
-  const { data: favourites = [], isPending, } = useQuery({
-    queryKey: ["favourites"],
-    queryFn: getFavouriteMovies,
-    refetchOnMount: true,
-    staleTime: 0,
-  });
-
-  const movieIds = favourites.map((f) => f.movieId);
+  const {favorites: movieIds} = useContext(MoviesContext)
 
   const favoriteMovieQueries = useQueries({
     queries: movieIds.map((movieId) => {
@@ -25,9 +18,9 @@ const FavoriteMoviesPage = () => {
     })
   });
 
-  const moviesPending = favoriteMovieQueries.find((m) => m.isPending === true);
+  const isPending = favoriteMovieQueries.find((m) => m.isPending === true);
 
-  if (isPending || moviesPending) {
+  if (isPending) {
     return <Spinner />;
   }
 
@@ -35,8 +28,6 @@ const FavoriteMoviesPage = () => {
     q.data.genre_ids = q.data.genres.map(g => g.id)
     return q.data
   });
-
-  const toDo = () => true;
 
   return (
     <PageTemplate
