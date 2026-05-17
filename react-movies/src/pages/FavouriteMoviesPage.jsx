@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries, useQuery } from "@tanstack/react-query";
@@ -7,9 +7,11 @@ import Spinner from '../components/spinner'
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 const FavoriteMoviesPage = () => {
- const { data: favourites =[], isPending, } = useQuery({
+  const { data: favourites = [], isPending, } = useQuery({
     queryKey: ["favourites"],
     queryFn: getFavouriteMovies,
+    refetchOnMount: true,
+    staleTime: 0,
   });
 
   const movieIds = favourites.map((f) => f.movieId);
@@ -22,7 +24,7 @@ const FavoriteMoviesPage = () => {
       }
     })
   });
-  
+
   const moviesPending = favoriteMovieQueries.find((m) => m.isPending === true);
 
   if (isPending || moviesPending) {
@@ -36,7 +38,7 @@ const FavoriteMoviesPage = () => {
 
   const toDo = () => true;
 
-   return (
+  return (
     <PageTemplate
       title="Favorite Movies"
       movies={movies}
