@@ -5,8 +5,8 @@ import asyncHandler from 'express-async-handler';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const WatchlistMovies = await WatchlistMovies.find({ userId: `${req.user._id}`});
-    res.status(200).json(WatchlistMovies);
+    const watchlistMovies = await WatchlistMovies.find({ userId: `${req.user._id}`});
+    res.status(200).json(watchlistMovies);
 });
 
 
