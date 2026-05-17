@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addFavouriteMovie } from "../api/tmdb-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -9,15 +10,11 @@ const [myReviews, setMyReviews] = useState( {} )
 const [watchlist, setWatchlist] = useState( [] )
 
 
-  const addToFavorites = (movie) => {
-    let newFavorites = [];
+  const addToFavorites = async (movie) => {
     if (!favorites.includes(movie.id)){
-      newFavorites = [...favorites, movie.id];
+      await addFavouriteMovie(movie);
+      setFavorites([...favorites, movie.id]);
     }
-    else{
-      newFavorites = [...favorites];
-    }
-    setFavorites(newFavorites)
   };
   
   // We will use this function in the next step

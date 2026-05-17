@@ -42,7 +42,7 @@ app.use('/api/users', usersRouter);
 //Actors router
 app.use('/api/actors', actorRouter);
 
-app.use('/api/favourites', favouriteMoviesRouter);
+app.use('/api/favourites', authenticate, favouriteMoviesRouter);
 
 app.use(errHandler);
 
