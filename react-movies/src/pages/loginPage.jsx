@@ -3,6 +3,9 @@ import { Navigate, useLocation } from "react-router";
 import { AuthContext } from '../contexts/authContext';
 import { Link } from "react-router";
 import Typography from "@mui/material/Typography";
+import { Grid, styled } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const LoginPage = () => {
     const context = useContext(AuthContext);
@@ -21,32 +24,85 @@ const LoginPage = () => {
     };
 
     let location = useLocation();
-    
-    const from =  "/movies/discover/1" ;
+
+    const from = "/movies/discover/1";
 
     if (context.isAuthenticated === true) {
         return <Navigate to={from} />;
     }
 
+    const styles = {
+        textField: {
+
+            "& .MuiInputLabel-root": {
+                color: "#00ACC1",
+            },
+
+            "& .MuiInputBase-input": {
+                color: "#00ACC1",
+            },
+
+            "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                    borderColor: "#00ACC1",
+                },
+                "&:hover fieldset": {
+                    borderColor: "#00ACC1",
+                },
+                "&.Mui-focused fieldset": {
+                    borderColor: "#00ACC1",
+                },
+            },
+        },
+    }
+
     return (
         <>
-            <h2>Login page</h2>
-            <p>You must log in to view the protected pages </p>
-            <input id="username" placeholder="user name" onChange={e => {
-                setUserName(e.target.value);
-            }}></input><br />
-            <input id="password" type="password" placeholder="password" onChange={e => {
-                setPassword(e.target.value);
-            }}></input><br />
-            {errorMessage && (
-                <Typography color="error" sx={{ mt: 2 }}>
-                    {errorMessage}
+
+            <Grid container direction={"column"} alignItems={"center"} justifyContent={"center"}>
+                <Typography variant={"h2"} textAlign={"center"} margin={5}>
+                    Log In
                 </Typography>
-            )}
-            {/* Login web form  */}
-            <button onClick={login}>Log in</button>
-            <p>Not Registered?
-                <Link to="/signup">Sign Up!</Link></p>
+
+                <Typography textAlign={"center"}>
+                    You must log in to gain access to awesome movies
+                </Typography>
+
+                <TextField
+                    sx={{...styles.textField, margin: 2}}
+                    label="Username"
+                    variant="outlined"
+                    required
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                />
+                <TextField
+                    sx={{...styles.textField, margin: 2}}
+                    label="Password"
+                    variant="outlined"
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {errorMessage && (
+                    <Typography color="error" sx={{ mt: 2 }}>
+                        {errorMessage}
+                    </Typography>
+                )}
+                <Button
+                    variant="outlined"
+                    onClick={login}
+                    sx={{
+                        mt: 2,
+                        width: "200px",
+                        borderRadius: 2,
+                        fontSize: "1rem",
+                    }}
+                >
+                    Log in
+                </Button>
+            </Grid>
         </>
     );
 };

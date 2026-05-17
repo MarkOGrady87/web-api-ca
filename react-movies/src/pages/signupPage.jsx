@@ -67,23 +67,6 @@ const SignUpPage = () => {
 
   return (
     <>
-      {/*       <h2>SignUp page</h2>
-      <p>You must register a username and password to log in. Usernames must be unique and passwords must contain a minimum of 8 characters (with at least one uppercase letter, one lowercase letter, and one symbol). </p>
-      <input value={userName} placeholder="user name" onChange={e => {
-        setUserName(e.target.value);
-      }}></input><br />
-      <input value={password} type="password" placeholder="password" onChange={e => {
-        setPassword(e.target.value);
-      }}></input><br />
-      <input value={passwordAgain} type="password" placeholder="password again" onChange={e => {
-        setPasswordAgain(e.target.value);
-      }}></input><br />
-      {errorMessage && (
-        <Typography color="error" sx={{ mt: 2 }}>
-          {errorMessage}
-        </Typography>
-      )}
-      <button onClick={register}>Register</button> */}
 
       <Grid container direction={"column"} alignItems={"center"} justifyContent={"center"}>
         <Typography variant={"h2"} textAlign={"center"} margin={5}>
