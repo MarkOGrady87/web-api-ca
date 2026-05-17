@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
-import { useQueries } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { getMovie, getFavouriteMovies } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 const FavoriteMoviesPage = () => {
-  const {favorites: movieIds } = useContext(MoviesContext);
+ const { data: favourites =[], isPending, } = useQuery({
+    queryKey: ["favourites"],
+    queryFn: getFavouriteMovies,
+  });
+
+  const movieIds = favourites.map((f) => f.movieId);
 
   const favoriteMovieQueries = useQueries({
     queries: movieIds.map((movieId) => {
@@ -18,9 +23,9 @@ const FavoriteMoviesPage = () => {
     })
   });
   
-  const isPending = favoriteMovieQueries.find((m) => m.isPending === true);
+  const moviesPending = favoriteMovieQueries.find((m) => m.isPending === true);
 
-  if (isPending) {
+  if (isPending || moviesPending) {
     return <Spinner />;
   }
 
