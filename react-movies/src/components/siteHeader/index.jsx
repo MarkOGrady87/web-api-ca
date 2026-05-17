@@ -26,7 +26,7 @@ const SiteHeader = () => {
 
   const menuOptions = context.isAuthenticated ? [
     { label: "Favorites", path: "/movies/favorites" },
-    { label: "Watchlist", path: "/movies/watchlist" }, 
+    { label: "Watchlist", path: "/movies/watchlist" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/toprated/1" },
     { label: "Popular", path: "/movies/popular/1" },
@@ -51,11 +51,8 @@ const SiteHeader = () => {
     <>
       <AppBar position="fixed" color="secondary">
         <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => navigate("/movies/discover/1")}>
+          <Typography variant="h4" sx={{ cursor: "pointer" }} onClick={() => navigate("/movies/discover/1")}>
             TMDB Client
-          </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            All you ever wanted to know about Movies!
           </Typography>
           {isMobile ? (
             <>
@@ -73,12 +70,12 @@ const SiteHeader = () => {
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: "top",
-                  horizontal: "right",
+                  horizontal: "center",
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
-                  horizontal: "right",
+                  horizontal: "center",
                 }}
                 open={open}
                 onClose={() => setAnchorEl(null)}
@@ -94,20 +91,48 @@ const SiteHeader = () => {
               </Menu>
             </>
           ) : (
+
             <>
-              {menuOptions.map((opt) => (
-                <Button
-                  key={opt.label}
-                  color="inherit"
-                  onClick={() => handleMenuSelect(opt.path)}
-                >
-                  {opt.label}
-                </Button>
-              ))}
+              {context.isAuthenticated ? (
+                < div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+                  {menuOptions.map((opt) => (
+                    <Button
+                      key={opt.label}
+                      color="inherit"
+                      onClick={() => handleMenuSelect(opt.path)}
+                    >
+                      {opt.label}
+                    </Button>
+                  ))}
+                </div>) : (
+                <>
+                  <div style={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
+                    {menuOptions.map((opt) => (
+                      <Button
+                        key={opt.label}
+                        color="inherit"
+                        onClick={() => handleMenuSelect(opt.path)}
+                      >
+                        {opt.label}
+                      </Button>
+                    ))
+                    }
+                  </div>
+                </>
+              )
+              }
             </>
           )}
+          {context.isAuthenticated &&
+            <>
+              < Typography >
+                {context.userName}
+              </Typography>
+              <button onClick={() => context.signout()} style={{ marginLeft: 18 }}>Sign out</button>
+            </>
+          }
         </Toolbar>
-      </AppBar>
+      </AppBar >
       <Offset />
     </>
   );
