@@ -21,7 +21,7 @@ router.post('/', asyncHandler(async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const result = await FavouriteMovies.deleteOne({
-        _id: req.params.id,
+        movieId: req.params.id,
     });
     if (result.deletedCount) {
         res.status(204).json();

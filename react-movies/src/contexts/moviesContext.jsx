@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addFavouriteMovie, getFavouriteMovies } from "../api/tmdb-api";
+import { addFavouriteMovie, getFavouriteMovies, deleteFavouriteMovies } from "../api/tmdb-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -22,8 +22,8 @@ const MoviesContextProvider = (props) => {
     }
   };
 
-  // We will use this function in the next step
-  const removeFromFavorites = (movie) => {
+  const removeFromFavorites = async (movie) => {
+    await deleteFavouriteMovies(movie.id);
     setFavorites(favorites.filter(
       (mId) => mId !== movie.id
     ))
