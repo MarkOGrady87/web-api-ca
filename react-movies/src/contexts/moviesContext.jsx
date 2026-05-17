@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { addFavouriteMovie, getFavouriteMovies, deleteFavouriteMovies } from "../api/tmdb-api";
+import { addFavouriteMovie, getFavouriteMovies, deleteFavouriteMovies, addWatchlistMovie, getWatchlistMovies, deleteWatchlistMovies } from "../api/tmdb-api";
 import { AuthContext } from "./authContext";
 
 export const MoviesContext = React.createContext(null);
@@ -14,6 +14,12 @@ const MoviesContextProvider = (props) => {
   useEffect(() => {
     getFavouriteMovies().then(favouriteMovies => {
       setFavorites(favouriteMovies.map((f) => f.movieId));
+    });
+  }, [authContext.isAuthenticated]);
+
+  useEffect(() => {
+    getWatchlistMovies().then(watchlistMovies => {
+      setWatchlist(watchlistMovies.map((f) => f.movieId));
     });
   }, [authContext.isAuthenticated]);
 
@@ -36,7 +42,7 @@ const MoviesContextProvider = (props) => {
   };
   //console.log(myReviews);
 
-  const addToWatchlist = (movie) => {
+  /* const addToWatchlist = (movie) => {
     let newWatchlist = [];
     if (!watchlist.includes(movie.id)) {
       newWatchlist = [...watchlist, movie.id];
@@ -49,6 +55,20 @@ const MoviesContextProvider = (props) => {
   console.log(watchlist)
 
   const removeFromWatchlist = (movie) => {
+    setWatchlist(watchlist.filter(
+      (mId) => mId !== movie.id
+    ))
+  }; */
+
+    const addToWatchlist = async (movie) => {
+    if (!watchlist.includes(movie.id)) {
+      await addWatchlistMovie(movie);
+      setWatchlist([...watchlist, movie.id]);
+    }
+  };
+
+  const removeFromWatchlist = async (movie) => {
+    await deleteWatchlistMovies(movie.id);
     setWatchlist(watchlist.filter(
       (mId) => mId !== movie.id
     ))

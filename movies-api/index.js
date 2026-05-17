@@ -9,7 +9,7 @@ import authenticate from './authenticate';
 import moviesRouter from './api/movies';
 import actorRouter from './api/actors';
 import favouriteMoviesRouter from './api/favouriteMovies';
-
+import watchlistMoviesRouter from './api/watchlistMovies';
 
 dotenv.config();
 
@@ -43,6 +43,8 @@ app.use('/api/users', usersRouter);
 app.use('/api/actors', actorRouter);
 
 app.use('/api/favourites', authenticate, favouriteMoviesRouter);
+
+app.use('/api/watchlist', authenticate, watchlistMoviesRouter);
 
 app.use(errHandler);
 

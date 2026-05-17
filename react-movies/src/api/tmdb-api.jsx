@@ -346,3 +346,42 @@ export const deleteFavouriteMovies = async (id) => {
     )
     return res;
 };
+
+export const getWatchlistMovies = async () => {
+    const response = await fetch(
+        `http://localhost:8080/api/watchlist`, {
+            headers: {
+                'Authorization': window.localStorage.getItem('token')
+            }
+        }
+    )
+    return response.json();
+};
+
+export const addWatchlistMovie = async(movie) => {
+    const res = await fetch(
+        `http://localhost:8080/api/watchlist`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': window.localStorage.getItem('token')
+            },
+            body: JSON.stringify({movieId: movie.id})
+        }
+    )
+        return res.json();
+};
+
+export const deleteWatchlistMovies = async (id) => {
+    const res =  fetch(
+        `http://localhost:8080/api/watchlist/${id}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Authorization': window.localStorage.getItem('token')
+            }
+        }
+    )
+    return res;
+};
